@@ -38,15 +38,35 @@ From the distribution of the users age we can observe that people from 20 to 30 
 <img src="figures/occupation_distr.png" width="600">
 </p>
 
+More detailed data analysis is done in notebook 1-0.
+
 # Model implementation
 
-
+To recommend a film to a user, k-nearest neighbours (k-NN) was used. K-NN is a supervised machine learning algorithm that can be used for classification and regression. First, the data is loaded from the files provided by the MovieLens dataset into Pandas dataFrames to make the data easier to work with. Then the data was transformed to the pivot table, where columns are movie titles and rows are user's rating to the corresponding movie. In order to fit the knn model with metric - cosine similarity and bruteforce algorithm, the pivot table was transformed to the sparse matrix. The cosine similarity metric was chosen because it is fast in computation for spaese matrices, and bruteforce was chosen as an algorithm because the dataset is small.
 
 ## Model Advantages and Disadvantages
 
-## Training Process
+### Advantages:
+* Easy to impement.
+* Lightweight model.
+* Fast on sparse matrices.
+* Domain independent.
+* Excellent predicted rating of the recommended movies. (Average of the top K predicted movie's rating is approximately 4.85)
+
+### Disadvantages:
+* For example, we have a splitted data into train and test sets, if I train the knn model on the train data and then propose movies to the user, this recommended movies will coincide with the movies from the test set at maximum only for 10%. This value is not satisfactory, it would be nice to have approximately 50% of similarity between test set and recommended movies. Howeever, apart from the test set, it also recommends the movies which the user did not watch.
+* Also I would say one of the drawbacks is the data dimensionality. Imagine having one million users who rated 500k movies. Than for each movie there will be a column and a row for each user.
 
 
 ## Evaluation
 
+For the evaluation purposes I used:
+* Mean average precision - 0.38.
+* Mean predicted rating of the recommended films - 4.85.
+* Set intersection between test set of the movies and predicted set of the movies - 0.093.
+
+To reproduce this results just run the evaluate.py in the benchmark folder of the project.
+
 # Results
+
+The implemented system for movie recommendations using k-nearest neighbors approach with cosine similarity as evaluation and bruteforce approach as an algorithm. This model was trained on the MovieLens100k dataset. The model proposes to the user a new movies for watching alongside with the predicted rating this user may give for the particular recommended movie. For the evaluation I used MAP@k, mean predicted rating of the recommended films, and set intersection between test set of the movies and predicted set of the movies.

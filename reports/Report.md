@@ -56,6 +56,14 @@ To recommend a film to a user, k-nearest neighbours (k-NN) was used. K-NN is a s
 ### Disadvantages:
 * For example, we have a splitted data into train and test sets, if I train the knn model on the train data and then propose movies to the user, this recommended movies will coincide with the movies from the test set at maximum only for 10%. This value is not satisfactory, it would be nice to have approximately 50% of similarity between test set and recommended movies. Howeever, apart from the test set, it also recommends the movies which the user did not watch.
 * Also I would say one of the drawbacks is the data dimensionality. Imagine having one million users who rated 500k movies. Than for each movie there will be a column and a row for each user.
+* Cannot recommend movies outside of the training data.
+
+### Training Process
+
+Collaborative filtering approach does not have any training process. There are several steps to start making predictions:
+- Generate a sparse matrix from the movie ratings.
+- Fit this matrix to knn model. 
+- Similar users are ready to recommend movies!
 
 
 ## Evaluation
